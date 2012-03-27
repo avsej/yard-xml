@@ -48,13 +48,15 @@ def init
     xml.summary(docstring_summary(object))
     if object.tags(:overload).size > 0
       xml.description(docstring_description(object, object.docstring.summary))
-      xml.notes do
-        object.tags(:note).each do |note|
-          xml.note do
-            xml.cdata!(html_markup_rdoc(note.text || ""))
+      {:note => "note", :see => "link"}.each do |tag, name|
+        xml.tag!("#{name}s") do
+          object.tags(tag).each do |tt|
+            xml.tag!(name) do
+              xml.cdata!(html_markup_rdoc(tt.text || ""))
+            end
           end
-        end
-      end if object.has_tag?(:note)
+        end if object.has_tag?(tag)
+      end
     end
     object.aliases.each do |aa|
       xml.alias(:name => aa.name)
@@ -163,13 +165,15 @@ def describe_method(xml, object, method)
       end
     end if method.has_tag?(:raise)
 
-    xml.notes do
-      method.tags(:note).each do |note|
-        xml.note do
-          xml.cdata!(html_markup_rdoc(note.text || ""))
+    {:note => "note", :see => "link"}.each do |tag, name|
+      xml.tag!("#{name}s") do
+        object.tags(tag).each do |tt|
+          xml.tag!(name) do
+            xml.cdata!(html_markup_rdoc(tt.text || ""))
+          end
         end
-      end
-    end if method.has_tag?(:note)
+      end if object.has_tag?(tag)
+    end
 
     xml.examples do
       method.tags(:example).each do |example|
