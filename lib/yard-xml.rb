@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+require 'yard'
 require File.dirname(__FILE__) + '/yard-xml/helper'
 YARD::Templates::Template.extra_includes = [YardXML::Helper]
 YARD::Templates::Engine.register_template_path(File.dirname(__FILE__) + '/templates')

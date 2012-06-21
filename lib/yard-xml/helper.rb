@@ -21,10 +21,10 @@ require 'builder'
 module YardXML
   module Helper
 
-    include YARD::Templates::Helpers::TextHelper
+    include ::YARD::Templates::Helpers::TextHelper
     alias :text_signature :signature
 
-    include YARD::Templates::Helpers::HtmlHelper
+    include ::YARD::Templates::Helpers::HtmlHelper
     alias :html_signature :signature
 
     def docstring_summary(object)
