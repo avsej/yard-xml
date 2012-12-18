@@ -9,7 +9,7 @@ Install the gem:
 
     gem install yard-xml
 
-Edit ~/.yard/config and insert the following line:
+Edit `~/.yard/config` and insert the following line:
 
     load_plugins: true
 
