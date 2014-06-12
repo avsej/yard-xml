@@ -19,7 +19,7 @@
 def init
   Templates::Engine.with_serializer('index.xml', options[:serializer]) do
     xml = Builder::XmlMarkup.new(:indent => 4)
-    xml.documetation do
+    xml.documentation do
       YARD::Registry.root.children.sort_by do |child|
         [
           child.type.to_s,
