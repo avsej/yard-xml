@@ -18,9 +18,10 @@
 
 def init
   xml = options[:xml_builder]
-  info = {:name => object.name, :scope => object.scope}
+  info = {:name => object.name.to_s, :scope => object.scope.to_s}
   if object.is_attribute?
-    if object.name:default_format
+    if object.name
+      :default_format
     end
     info[:attribute] = true
     info[:name] = object.name.to_s.sub(/=$/, '')
@@ -62,7 +63,7 @@ def init
       end if object.has_tag?(:see)
     end
     object.aliases.each do |aa|
-      xml.alias(:name => aa.name)
+      xml.alias(:name => aa.name.to_s)
     end
     xml.overloads do
       if object.tags(:overload).size > 0
@@ -85,7 +86,7 @@ def describe_method(xml, object, method)
     [:param, :yieldparam].each do |tag_name|
       xml.tag!("#{tag_name}s") do
         method.tags(tag_name).each do |param|
-          info = {:name => param.name}
+          info = {:name => param.name.to_s}
           default = method.parameters.assoc(param.name)
           if default && default[1]
             info[:default] = default[1]
@@ -104,7 +105,7 @@ def describe_method(xml, object, method)
             unless options.empty?
               xml.options do
                 options.each do |option|
-                  info = {:name => option.pair.name}
+                  info = {:name => option.pair.name.to_s}
                   if option.pair.defaults
                     info[:default] = option.pair.defaults.first
                   end

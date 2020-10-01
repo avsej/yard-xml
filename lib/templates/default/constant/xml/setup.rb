@@ -18,7 +18,7 @@
 
 def init
   xml = options[:xml_builder]
-  xml.constant(:name => object.name, :value => object.value) do
+  xml.constant(:name => object.name.to_s, :value => object.value.to_s) do
     xml.description do
       xml.cdata!(html_markup_rdoc(object.docstring))
     end

@@ -18,7 +18,7 @@
 
 def init
   xml = options[:xml_builder]
-  xml.module(:name => object.name) do
+  xml.module(:name => object.name.to_s) do
 
     object.instance_mixins.each do |mixin|
       xml.instance_mixin mixin.path
